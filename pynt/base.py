@@ -15,6 +15,7 @@ or see the home github repo
 <https://github.com/davidlowryduda/pynt>.
 """
 from typing import List, Tuple, Union
+from itertools import product as cartesian_product
 import numpy
 
 
@@ -141,3 +142,25 @@ def factor(num: int) -> List[Tuple[int, int]]:
             num = num // prime
         factors.append((prime, exp))
     return factors
+
+
+def factors(num: int) -> List[int]:
+    """
+    Returns the list of factors of an integer.
+
+    Examples:
+    >>> factors(6)
+    [1, 2, 3, 6]
+    >>> factors(30)
+    [1, 2, 3, 5, 6, 10, 15, 30]
+    """
+    factorization = factor(num)
+    primes_, exps = zip(*factorization)
+    exp_choices = cartesian_product(*[range(exp+1) for exp in exps])
+    ret = []
+    for exp_choice in exp_choices:
+        val = 1
+        for prime, exp in zip(primes_, exp_choice):
+            val *= (prime**exp)
+        ret.append(val)
+    return sorted(ret)

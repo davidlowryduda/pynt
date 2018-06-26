@@ -1,3 +1,3 @@
 #!/bin/sh
 
-pytest --doctest-modules pynt/
+pytest -v --doctest-modules pynt/
