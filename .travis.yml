@@ -1,7 +1,9 @@
 language: python
+python:
+  - "3.6"
 
 install:
-    - pip install -r requirements.txt
+  - pip install -r requirements.txt
 
 script:
-    - pytest -v --cov=pynt --doctest-modules pynt
+  - pytest -v --cov=pynt --doctest-modules pynt
